@@ -1,6 +1,6 @@
 ---
 title: "MarioKart Records"
-author: "Brennan Mulligan & Adam Haertter"
+author: "Adam Haertter & Brennan Mulligan"
 format: pdf
 ---
 
@@ -17,7 +17,20 @@ drivers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/ti
 ```
 
 ```{r}
-three_laps <- records %>% filter(type == "Three Lap") %>% 
+# Compare the times of both systems played for each track
+three_lap <- records %>% filter(type == "Three Lap") %>%
+  group_by(track, system_played) %>%
+  summarize(best_time = min(time))
+
+ggplot(three_lap, aes(x = track, y = best_time, fill = system_played)) + geom_bar(stat = "identity", position = position_dodge()) + labs(x = "Tracks", y = "Times", title = "Three Lap") + theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) + guides(fill = guide_legend(title = "System Played"))
+
+single_lap <- records %>% filter(type == "Single Lap") %>%
+  group_by(track, system_played) %>%
+  summarize(best_time = min(time))
+
+ggplot(single_lap, aes(x = track, y = best_time, fill = system_played)) + geom_bar(stat = "identity", position = position_dodge()) + labs(x = "Tracks", y = "Times", title = "Single Lap") + theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) + guides(fill = guide_legend(title = "System Played"))
 ```
 
 ```{r}
