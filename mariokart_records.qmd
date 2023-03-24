@@ -22,4 +22,5 @@ three_laps <- records %>% filter(type == "Three Lap") %>%
 # Which countries prefer which tracks?
 
 
+
 ```
