@@ -1,0 +1,17 @@
+---
+title: "MarioKart Records"
+author: "Brennan Mulligan"
+format: pdf
+---
+
+
+```{r}
+library("tidyverse")
+library("readr")
+records <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-05-25/records.csv')
+drivers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-05-25/drivers.csv')
+```
+
+```{r}
+three_laps <- records %>% filter(type == "Three Lap") %>% 
+```
